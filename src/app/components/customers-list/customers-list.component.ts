@@ -48,7 +48,7 @@ export class CustomersListComponent {
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.refreshList();
+          this.customers = [];
         },
         error: (e) => console.error(e)
       });
