@@ -32,9 +32,8 @@ export class CustomerService {
     return this.http.delete<boolean>(baseUrl, { body: customer });
   }
 
-  // TODO: Good to Have
   deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
+    return this.http.delete(`${baseUrl}/deleteAll`);
   }
 
   // TODO: Good to Have
