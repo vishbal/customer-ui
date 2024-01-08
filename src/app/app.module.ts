@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
 import { CustomersListComponent } from './components/customers-list/customers-list.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { CustomersListComponent } from './components/customers-list/customers-li
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
