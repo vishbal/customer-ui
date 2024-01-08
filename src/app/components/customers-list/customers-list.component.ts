@@ -34,11 +34,13 @@ export class CustomersListComponent {
     this.getAllCustomers();
     this.currentCustomer = getDefaultCustomer();
     this.currentIndex = -1;
+    sessionStorage.removeItem('currentCustomer')
   }
 
   setActiveCustomer(customer: ICustomer, index: number): void {
     this.currentCustomer = customer;
     this.currentIndex = index;
+    sessionStorage.setItem('currentCustomer', JSON.stringify(this.currentCustomer));
   }
 
   removeAllCustomers(): void {
