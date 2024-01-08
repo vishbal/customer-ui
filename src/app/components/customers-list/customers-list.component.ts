@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ICustomer, getDefaultCustomer } from 'src/app/models/customer.model';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-customers-list',
@@ -6,5 +8,55 @@ import { Component } from '@angular/core';
   styleUrls: ['./customers-list.component.scss']
 })
 export class CustomersListComponent {
+  customers?: ICustomer[];
+  currentCustomer: ICustomer = getDefaultCustomer();
+  currentIndex = -1;
+  searchText = '';
+
+  constructor(private customerService: CustomerService) { }
+
+  ngOnInit(): void {
+    this.getAllCustomers();
+  }
+
+  getAllCustomers(): void {
+    this.customerService.getAll()
+      .subscribe({
+        next: (data) => {
+          this.customers = data;
+          console.log(data);
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  refreshList(): void {
+    this.getAllCustomers();
+    this.currentCustomer = getDefaultCustomer();
+    this.currentIndex = -1;
+  }
+
+  setActiveCustomer(customer: ICustomer, index: number): void {
+    this.currentCustomer = customer;
+    this.currentIndex = index;
+  }
+
+  removeAllCustomers(): void {
+    this.customerService.deleteAll()
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.refreshList();
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  searchCustomer(): void {
+    this.currentCustomer = getDefaultCustomer();
+    this.currentIndex = -1;
+
+    this.customers = this.customers?.filter(c => c.firstName.includes(this.searchText) || this.currentCustomer.lastName.includes(this.searchText));
+  }
 
 }

@@ -4,5 +4,16 @@ export interface ICustomer {
     lastName: string;
     email: string;
     createdDate: Date;
-    UpdatedDate: Date;
+    updatedDate: Date;
+}
+
+export function getDefaultCustomer(): ICustomer {
+    return {
+        id: 0,
+        firstName: '',
+        lastName: '',
+        email: '',
+        createdDate: new Date(),
+        updatedDate: new Date()
+    };
 }

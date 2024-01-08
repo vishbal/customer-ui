@@ -1,1 +1,44 @@
-<p>customers-list works!</p>
+<div class="list row">
+    <div class="col-md-8">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search by name" [(ngModel)]="searchText" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="button" (click)="searchCustomer()">
+                    Search
+                </button>
+                <button class="btn btn-outline-secondary" type="button" (click)="getAllCustomers()">
+                    Clear
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12">
+        <h4>List of Customers</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Created Date</th>
+                    <th scope="col">Last Updated Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers; let i = index" [class.active]="i == currentIndex"
+                    (click)="setActiveCustomer(customer, i)">
+                    <td>{{ customer.firstName }}</td>
+                    <td>{{ customer.lastName }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.createdDate }}</td>
+                    <td>{{ customer.updatedDate }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="m-3 btn btn-sm btn-danger" (click)="removeAllCustomers()" [disabled]="customers?.length === 0">
+            Remove All
+        </button>
+    </div>
+</div>
